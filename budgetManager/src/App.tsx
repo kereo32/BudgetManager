@@ -1,10 +1,7 @@
 import { SyntheticEvent, useContext, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { auth } from './config/firebaseSetup';
-import { AuthContext } from './context/AuthContext';
-import ProtectedRoute from './ProtectedRoute';
 import Home from './scenes/Home';
-import Login from './scenes/Login';
+import Navbar from './scenes/Navbar';
 import Profile from './scenes/Profile';
 
 //TODO
@@ -13,17 +10,10 @@ import Profile from './scenes/Profile';
 function App() {
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
