@@ -21,8 +21,13 @@ export function ExpenseForm(props: props) {
       amount: data.get('amount'),
       date: data.get('date'),
     };
-    addExpense(expense);
-    props.setOpen((prevState) => !prevState);
+    //check if the expense is valid and close the modal
+    if (expense.name && expense.amount && expense.date) {
+      addExpense(expense);
+      props.setOpen(false);
+    } else {
+      throw new Error('Invalid Expense. Please add a valid Expense');
+    }
   };
   return (
     <Modal isOpen={props.isOpen}>
