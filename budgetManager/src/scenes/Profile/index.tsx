@@ -18,11 +18,11 @@ const Profile = (props: Props) => {
   return (
     <div className="flex flex-col gap-16 py-16 w-screen h-screen mt-10">
       <div className="flex flex-col mt-[5%] items-center w-full">
-        <h1 className="text-4xl text-center">Username : {user.name}</h1>
+        <h1 className="text- 4xl text-center">Username : {user.name}</h1>
         <p className="text-center mt-6">User Budget : {user.budget}</p>
       </div>
       <div className="flex flex-row gap-10 justify-center">{expenses}</div>
-      <SubmitButton user={user} setUser={setUser} setIsModalOpen={setIsModalOpen}></SubmitButton>
+      <SubmitButton setIsModalOpen={setIsModalOpen}></SubmitButton>
       <ExpenseForm setOpen={setIsModalOpen} isOpen={isModalOpen} />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserContext } from '../../context/userContext';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,6 @@ export function UserInputForm() {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    localStorage.removeItem('user');
     setIsSubmitted((prevState) => !prevState);
     console.log(user);
   };

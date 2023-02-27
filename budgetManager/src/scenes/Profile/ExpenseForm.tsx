@@ -8,7 +8,7 @@ type props = {
 };
 
 export function ExpenseForm(props: props) {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, addExpense } = useContext(UserContext);
 
   const handleClick = (e: any) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ export function ExpenseForm(props: props) {
       amount: data.get('amount'),
       date: data.get('date'),
     };
-    setUser({ ...user, expenses: [...user.expenses, expense] });
+    addExpense(expense);
     props.setOpen((prevState) => !prevState);
   };
   return (
