@@ -21,7 +21,6 @@ export function ExpenseForm(props: props) {
       amount: data.get('amount'),
       date: data.get('date'),
     };
-    //check if the expense is valid and close the modal
     if (expense.name && expense.amount && expense.date) {
       addExpense(expense);
       props.setOpen(false);
