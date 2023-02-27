@@ -9,6 +9,7 @@ export function UserInputForm() {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    localStorage.removeItem('user');
     setIsSubmitted((prevState) => !prevState);
     console.log(user);
   };

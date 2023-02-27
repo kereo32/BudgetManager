@@ -3,6 +3,7 @@ import { UserContext } from '../../context/userContext';
 import { Expense } from '../../global/types';
 import ExpenseCard from './ExpenseCard';
 import { ExpenseForm } from './ExpenseForm';
+import { SubmitButton } from './SubmitButton';
 
 type Props = {};
 
@@ -15,21 +16,13 @@ const Profile = (props: Props) => {
   });
 
   return (
-    <div className="flex flex-col gap-16 py-16 w-screen h-screen">
+    <div className="flex flex-col gap-16 py-16 w-screen h-screen mt-10">
       <div className="flex flex-col mt-[5%] items-center w-full">
         <h1 className="text-4xl text-center">Username : {user.name}</h1>
         <p className="text-center mt-6">User Budget : {user.budget}</p>
       </div>
-
-      {expenses}
-      <button
-        onClick={() => {
-          setIsModalOpen((prevState) => !prevState);
-        }}
-        className="bg-pepe-red text-white px-4 py-2 rounded-md mt-10"
-      >
-        Add Expense
-      </button>
+      <div className="flex flex-row gap-10 justify-center">{expenses}</div>
+      <SubmitButton user={user} setUser={setUser} setIsModalOpen={setIsModalOpen}></SubmitButton>
       <ExpenseForm setOpen={setIsModalOpen} isOpen={isModalOpen} />
     </div>
   );
