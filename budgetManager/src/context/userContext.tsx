@@ -10,7 +10,7 @@ const defaultUser = {
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
+  const [user, setUser] = useState<User>(() => {
     const storageUser = localStorage.getItem('user');
     return storageUser ? JSON.parse(storageUser) : localStorage.setItem('user', JSON.stringify(defaultUser));
   });
@@ -19,9 +19,9 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
-  const addExpense = (newExpense) => {
+  const addExpense = (newExpense: Expense) => {
     const updatedExpenses = [...user.expenses, newExpense];
-    const updatedBudget = user.budget - newExpense.amount;
+    const updatedBudget = user.budget - newExpense.amount > 0 ? user.budget - newExpense.amount : 0;
     setUser((prevState) => ({
       ...prevState,
       expenses: updatedExpenses,

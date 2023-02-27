@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { UserContext } from '../../context/userContext';
 import { Link } from 'react-router-dom';
+import validator from 'validator';
 
 export function UserInputForm() {
   const { user, setUser } = React.useContext(UserContext);
@@ -20,7 +21,7 @@ export function UserInputForm() {
         <input
           type="text"
           onChange={(e) => {
-            setUser({ ...user, name: e.target.value });
+            validator.isAlpha(e.target.value) || e.target.value == '' ? setUser({ ...user, name: e.target.value }) : null;
           }}
           value={user.name}
           className="border-2 border-black rounded-md px-2 py-1 mt-2"
@@ -28,7 +29,7 @@ export function UserInputForm() {
         <label className="text-2xl mt-4">Enter your budget</label>
         <input
           onChange={(e) => {
-            setUser({ ...user, budget: e.target.value });
+            validator.isNumeric(e.target.value) || e.target.value == '' ? setUser({ ...user, budget: e.target.value }) : null;
           }}
           type="text"
           value={user.budget}

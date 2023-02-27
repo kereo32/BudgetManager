@@ -1,6 +1,9 @@
 import { SyntheticEvent, useContext } from 'react';
 import Modal from 'react-modal';
 import { UserContext } from '../../context/userContext';
+import validator from 'validator';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 type props = {
   isOpen: boolean;
@@ -25,11 +28,29 @@ export function ExpenseForm(props: props) {
     <Modal isOpen={props.isOpen}>
       <form id="expenseform" className="flex flex-col items-center mt-[10%]">
         <label className="text-2xl">Enter your expense name</label>
-        <input id="name" name="name" type="text" className="border-2 border-black rounded-md px-2 py-1 mt-2" />
+        <input
+          onKeyDown={(e) => {
+            validator.isAlpha(e.key) || e.key == '' ? null : e.preventDefault();
+          }}
+          id="name"
+          name="name"
+          type="text"
+          className="border-2 border-black rounded-md px-2 py-1 mt-2"
+        />
         <label className="text-2xl mt-4">Enter your expense amount</label>
-        <input name="amount" type="text" className="border-2 border-black rounded-md px-2 py-1 mt-2" />
+        <input
+          name="amount"
+          onKeyDown={(e) => {
+            validator.isNumeric(e.key) || e.key == '' || e.key == 'Backspace' ? null : e.preventDefault();
+          }}
+          type="text"
+          className="border-2 border-black rounded-md px-2 py-1 mt-2"
+        />
         <label className="text-2xl mt-4">Enter your expense date</label>
-        <input name="date" type="text" className="border-2 border-black rounded-md px-2 py-1 mt-2" />
+        <div className="border-2 border-black rounded-md px-2 py-1 mt-2 text-center">
+          <DatePicker name="date" selected={new Date()} onChange={(date) => (validator.isDate(date) ? date : null)} />{' '}
+        </div>
+
         <button
           onClick={(e) => {
             handleClick(e);
